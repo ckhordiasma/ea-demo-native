@@ -7,6 +7,14 @@ menuItems = [{
     "title": "Home View",
     "moduleName": "components/homeView/homeView",
     "icon": "\ue0dd"
+}, {
+    "title": "Form",
+    "moduleName": "components/formView/formView",
+    "icon": "\ue204"
+}, {
+    "title": "Horses",
+    "moduleName": "components/masterDetailView/masterDetailView",
+    "icon": "\ue0e4"
 }];
 
 navigationViewModel.set('menuItems', menuItems);

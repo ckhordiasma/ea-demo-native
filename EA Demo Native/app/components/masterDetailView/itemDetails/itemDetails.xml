@@ -1,0 +1,27 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" navigatedTo="navigatedTo">
+    <Page.actionBar>
+        <widgets:action-bar />
+    </Page.actionBar>
+
+    <GridLayout rows="auto, *">
+        <GridLayout rows="auto" columns="*, *">
+
+
+        </GridLayout>
+        <StackLayout row="1">
+
+            <Image width="75" height="75" src="{{ Image }}" />
+
+
+            <Label text="{{ Name }}" />
+
+ 
+            <Label text="{{ Breed }}" />
+
+
+            <TextView text="{{ Height }}" editable="false" />
+
+            <!-- additional view content -->
+        </StackLayout>
+    </GridLayout>
+</Page>

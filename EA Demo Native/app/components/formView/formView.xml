@@ -1,0 +1,54 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded">
+    <Page.actionBar>
+        <widgets:action-bar />
+    </Page.actionBar>
+
+    <StackLayout>
+
+        <StackLayout>
+
+            <GridLayout columns="auto, *" rows="auto, auto" cssClass="form-item">
+                <StackLayout height="50" row="1" colSpan="2" />
+
+
+                <Label text="Username" cssClass="label" col="1" row="0" />
+
+
+                <TextField col="1" row="1" />
+
+
+            </GridLayout>
+            <StackLayout cssClass="form-item-border" height="1"></StackLayout>
+
+            <GridLayout columns="auto, *" rows="auto, auto" cssClass="form-item">
+                <StackLayout height="50" row="1" colSpan="2" />
+
+
+                <Label text="Password" cssClass="label" col="1" row="0" />
+
+
+                <TextField col="1" row="1" secure="true" />
+
+
+            </GridLayout>
+            <StackLayout cssClass="form-item-border" height="1"></StackLayout>
+            <!-- formViewModel additional fields -->
+
+
+            <GridLayout columns="*, *" rows="auto" cssClass="form-buttons">
+
+                <widgets:button text="Cancel" tap="onformViewModelFormCancel" />
+
+
+                <widgets:button col="1" text="Confirm" tap="onformViewModelFormSubmit" />
+
+            </GridLayout>
+        </StackLayout>
+        <!-- additional view content -->
+
+        <!-- START_CUSTOM_CODE_formView -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+        <!-- END_CUSTOM_CODE_formView -->
+    </StackLayout>
+</Page>

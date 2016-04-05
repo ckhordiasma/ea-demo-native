@@ -15,6 +15,10 @@ menuItems = [{
     "title": "Horses",
     "moduleName": "components/masterDetailView/masterDetailView",
     "icon": "\ue0e4"
+}, {
+    "title": "Profile",
+    "moduleName": "components/profileInputPage/profileInputPage",
+    "icon": "\ue0e4"
 }];
 
 navigationViewModel.set('menuItems', menuItems);

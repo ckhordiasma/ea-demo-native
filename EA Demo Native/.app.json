@@ -4,7 +4,26 @@
     {
       "type": "NativeScript:view",
       "name": "homeView",
-      "components": [],
+      "components": [
+        {
+          "type": "NativeScript:authentication",
+          "name": "homeViewModel",
+          "dataProvider": "eaDemoNative",
+          "emailLabel": "Email",
+          "passwordLabel": "Password",
+          "signinLabel": "Sign In",
+          "signinRedirect": "masterDetailView",
+          "enableRegistration": true,
+          "gotoRegisterLabel": "Register",
+          "registerEmailLabel": "Email",
+          "registerPasswordLabel": "Password",
+          "registerLabel": "Register",
+          "registerRedirect": "profileInputPage",
+          "gotoSigninLabel": "Sign In",
+          "enableLogout": false,
+          "enableRememberme": false
+        }
+      ],
       "title": "Home View",
       "addToNavigation": true,
       "icon": "home"
@@ -113,6 +132,44 @@
       "title": "Horses",
       "addToNavigation": true,
       "icon": "contacts"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "profileInputPage",
+      "components": [
+        {
+          "type": "NativeScript:form",
+          "components": [
+            {
+              "type": "NativeScript:field",
+              "name": "firstName",
+              "title": "First Name",
+              "inputType": "text",
+              "titlePosition": "left"
+            },
+            {
+              "type": "NativeScript:field",
+              "name": "lastName",
+              "title": "Last Name",
+              "inputType": "text",
+              "titlePosition": "left"
+            },
+            {
+              "type": "NativeScript:field",
+              "name": "cellNumber",
+              "title": "Cell Number",
+              "inputType": "text",
+              "titlePosition": "left"
+            }
+          ],
+          "name": "profileInputPageModel",
+          "submitButton": "Confirm",
+          "cancelButton": "Cancel"
+        }
+      ],
+      "title": "Profile",
+      "addToNavigation": true,
+      "icon": "contacts"
     }
   ],
   "dataProviders": [
@@ -126,7 +183,7 @@
     }
   ],
   "name": "nativeScriptApp",
-  "navigation": "listmenu",
-  "transition": "none",
+  "navigation": "none",
+  "view": "homeView",
   "skin": "native"
 }

@@ -46,7 +46,10 @@ Service.prototype.register = function(args, successCallback, errorCallback) {
 
     return dataService.Users.register(args.email, args.password, {
             Email: args.email,
-            DisplayName: args.displayName
+            DisplayName: args.displayName, 
+        	FirstName: args.firstName, 
+        	LastName: args.lastName, 
+        	CellNumber: args.cellNumber
         })
         .then(successCallback, errorCallback);
 };

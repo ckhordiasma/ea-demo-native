@@ -44,7 +44,7 @@ function onSignin(data) {
 }
 
 function registerSuccess() {
-    helpers.navigate('components/profileInputPage/profileInputPage');
+    helpers.navigate('components/profileInputPage/homeView');
 }
 
 function onRegister(data) {

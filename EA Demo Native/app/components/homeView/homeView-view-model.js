@@ -14,6 +14,9 @@ ViewModel = new Observable({
     displayName: '',
     email: '',
     password: '',
+    firstName: '',
+    lastName: '',
+    cellNumber: '',
 
     events: {
         register: 'register',
@@ -40,7 +43,10 @@ ViewModel = new Observable({
             eventName: this.events.register,
             displayName: this.get('displayName'),
             password: this.get('password'),
-            email: this.get('email')
+            email: this.get('email'),
+            firstName: this.get('fistName'),
+            lastName: this.get('lastName'),
+            cellNumber: this.get('cellNumber')
         });
     },
 

@@ -1,10 +1,16 @@
 <ActionBar title="Title">
-    <NavigationButton text="Back" android.systemIcon="ic_menu_back"
+    
+    <NavigationButton text="Logout" 
         tap="onBack" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
     </NavigationButton>
+ <!-- android.systemIcon="ic_menu_back"
+    -->
 
     <ActionBar.actionItems>
-        <ActionItem text="Index" ios.position="right"
+        <!--<ActionItem text="Logout" ios.position="left" 
+            tap="onBack" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
+        </ActionItem>-->
+        <ActionItem text="Add" ios.position="right" 
             tap="onIndex" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
         </ActionItem>
     </ActionBar.actionItems>

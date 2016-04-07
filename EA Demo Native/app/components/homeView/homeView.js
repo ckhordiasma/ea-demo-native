@@ -37,6 +37,7 @@ function signinSuccess() {
 }
 
 function onSignin(data) {
+    
     if (validateData(data)) {
         data.email = data.email.toLowerCase();
         service.signin(data, signinSuccess, authError);
@@ -44,7 +45,7 @@ function onSignin(data) {
 }
 
 function registerSuccess() {
-    helpers.navigate('components//masterDetailView/masterDetailView');
+    helpers.navigate('components/profileInputPage/profileInputPage');
 }
 
 function onRegister(data) {
@@ -70,6 +71,11 @@ function pageLoaded(args) {
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
+    //alert(page.navigationContext);
+    //alert(page.navigationContext.logout);
+    
+    // I think navigationContext and navigationContext.logout are placeholders. 
+    /**
     if (page.navigationContext && page.navigationContext.logout) {
         service.signout(onShowSignin, onShowSignin);
     } else {
@@ -78,6 +84,7 @@ function pageLoaded(args) {
             signinSuccess();
         }
     }
+    */
     // additional pageLoaded
 
     if (isInit) {

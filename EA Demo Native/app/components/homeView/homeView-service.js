@@ -25,12 +25,12 @@ function validateArgs(args) {
     }
 }
 
-Service.prototype.signin = function(args, successCallback, errorCallback) {
+Service.prototype.signin = function (args, successCallback, errorCallback) {
     validateArgs(args);
 
     return dataService.Users.login(args.email, args.password)
-        .then(function(e) {
-        	localSettings.setString(consts.accessTokenKey,
+        .then(function (e) {
+            localSettings.setString(consts.accessTokenKey,
                 e.result.access_token);
             localSettings.setString(consts.accessTokenTypeKey,
                 e.result.token_type);
@@ -41,27 +41,34 @@ Service.prototype.signin = function(args, successCallback, errorCallback) {
         }, errorCallback);
 };
 
-Service.prototype.register = function(args, successCallback, errorCallback) {
+Service.prototype.register = function (args, successCallback, errorCallback) {
     validateArgs(args);
 
-    return dataService.Users.register(args.email, args.password, {
-            Email: args.email,
-            DisplayName: args.displayName
-        })
-        .then(successCallback, errorCallback);
+    return dataService.data('People').save({
+            FirstName: args.firstName,
+            LastName: args.lastName,
+            CellNumber: args.cellNumber,
+            // save properties
+        }).then(function (person) {
+        	alert(person.result.Id);
+            dataService.Users.register(args.email, args.password, {
+                Email: args.email,
+                PersonID: person.result.Id
+            });
+        }).then(successCallback, errorCallback);
 };
 
-Service.prototype.getCurrentUser = function() {
+Service.prototype.getCurrentUser = function () {
     return dataService.Users.currentUser();
 };
 
-Service.prototype.isAuthenticated = function() {
+Service.prototype.isAuthenticated = function () {
     return localSettings.getString(consts.accessTokenKey) &&
         localSettings.getString(consts.accessTokenTypeKey) &&
         localSettings.getString(consts.accessTokenPrincipalIdKey);
 };
 
-Service.prototype.setAuthorization = function() {
+Service.prototype.setAuthorization = function () {
     dataService.Users.setAuthorization(
         localSettings.getString(consts.accessTokenKey),
         localSettings.getString(consts.accessTokenTypeKey),

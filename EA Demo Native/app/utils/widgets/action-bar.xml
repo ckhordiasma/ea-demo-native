@@ -1,18 +1,24 @@
 <ActionBar title="Title">
     
-    <NavigationButton text="Logout" 
-        tap="onBack" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
+    <!-- Android: looks like a back button. iPhone: "BACK" button. -->
+    <NavigationButton text="Back" 
+        tap="onIndex" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}" android.systemIcon="ic_menu_back">
     </NavigationButton>
- <!-- android.systemIcon="ic_menu_back"
-    -->
+
 
     <ActionBar.actionItems>
-        <!--<ActionItem text="Logout" ios.position="left" 
-            tap="onBack" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
-        </ActionItem>-->
-        <ActionItem text="Add" ios.position="right" 
-            tap="onIndex" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
+        <!-- This tag adds a text button to the right side of the nav bar. -->
+        <!-- Right now, it is set to run the "onIndex" function when the button is pressed. 
+ 		TODO implement logging out feature.-->
+        <ActionItem text="Logout" ios.position="right" 
+            tap="onLogout" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
         </ActionItem>
+        
+        <!--<ActionItem text="Add" ios.position="right" 
+            tap="onAdd" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}">
+        </ActionItem>-->
+       
+        
     </ActionBar.actionItems>
 
     <ActionBar.titleView>

@@ -1,6 +1,7 @@
 'use strict';
 
 var frameModule = require('ui/frame');
+var dataService = require('../../dataProviders/eaDemoNative');
 
 function onBack() {
     // Android only
@@ -15,5 +16,17 @@ function onIndex() {
     topmost.navigate('navigation/navigation');
 }
 
+function onLogout() {
+    dataService.authentication.logout(function () {
+        alert("Logout successful!");
+    }, function (err) {
+        alert("Failed to logout: " + err.message);
+    });
+    var topmost = frameModule.topmost();
+
+    topmost.navigate('components/homeView/homeView');
+}
+
 exports.onBack = onBack;
 exports.onIndex = onIndex;
+exports.onLogout = onLogout;

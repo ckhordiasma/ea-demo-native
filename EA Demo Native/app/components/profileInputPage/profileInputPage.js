@@ -51,12 +51,8 @@ exports.onprofileInputPageModelFormSubmit = function onprofileInputPageModelForm
     data.save({
 
             FirstName: viewModel.get('firstName'),
-
             LastName: viewModel.get('lastName'),
-
             CellNumber: viewModel.get('cellNumber'),
-
-            // save properties
 
         })
         .then(onRequestSuccess.bind(this))

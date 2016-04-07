@@ -23,7 +23,8 @@ function onLogout() {
         alert("Failed to logout: " + err.message);
     });
     var topmost = frameModule.topmost();
-
+	
+    //navigate to the login screen (homeView) after logging out.
     topmost.navigate('components/homeView/homeView');
 }
 

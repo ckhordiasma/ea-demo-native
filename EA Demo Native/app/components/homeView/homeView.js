@@ -33,7 +33,10 @@ function authError(error) {
 }
 
 function signinSuccess() {
-    helpers.navigate('components/masterDetailView/masterDetailView');
+    //helpers.navigate('components/masterDetailView/masterDetailView');
+    
+    // on sign in success, redirect to the navigation menu with all the various options.
+    helpers.navigate('navigation/navigation');
 }
 
 function onSignin(data) {
@@ -45,6 +48,7 @@ function onSignin(data) {
 }
 
 function registerSuccess() {
+    //on registration success, redirect to the profile input page.
     helpers.navigate('components/profileInputPage/profileInputPage');
 }
 

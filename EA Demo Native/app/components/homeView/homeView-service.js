@@ -10,7 +10,7 @@ var _,
 function Service() {}
 
 consts = {
-    accessTokenKey: 'accessToken',
+    accessTokenKey: 'accessTokenType',
     accessTokenTypeKey: 'accessTokenType',
     accessTokenPrincipalIdKey: 'accessTokenPrincipalId'
 };
@@ -30,7 +30,7 @@ Service.prototype.signin = function(args, successCallback, errorCallback) {
 
     return dataService.Users.login(args.email, args.password)
         .then(function(e) {
-            localSettings.setString(consts.accessTokenKey,
+        	localSettings.setString(consts.accessTokenKey,
                 e.result.access_token);
             localSettings.setString(consts.accessTokenTypeKey,
                 e.result.token_type);
@@ -46,10 +46,7 @@ Service.prototype.register = function(args, successCallback, errorCallback) {
 
     return dataService.Users.register(args.email, args.password, {
             Email: args.email,
-            DisplayName: args.displayName, 
-        	FirstName: args.firstName, 
-        	LastName: args.lastName, 
-        	CellNumber: args.cellNumber
+            DisplayName: args.displayName
         })
         .then(successCallback, errorCallback);
 };

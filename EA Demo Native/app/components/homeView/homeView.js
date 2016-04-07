@@ -50,13 +50,19 @@ function onSignin(data) {
 function registerSuccess() {
     alert("Registration Success!");
     //on registration success, redirect to the profile input page. this doesn't work right now because the profile input page is broken.
-    helpers.navigate('components/profileInputPage/profileInputPage');
+    //helpers.navigate('components/profileInputPage/profileInputPage');
+    
+    //on registration success, go do navigation menu
+    //helpers.navigate('navigation/navigation');
+    
+    //on registration success, sign in.
 }
 
 function onRegister(data) {
     if (validateData(data)) {
         data.email = data.email.toLowerCase();
         service.register(data, registerSuccess, authError);
+        service.signin(data, signinSuccess, authError)
     }
 }
 

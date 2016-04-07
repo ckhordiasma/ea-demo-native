@@ -50,7 +50,6 @@ Service.prototype.register = function (args, successCallback, errorCallback) {
             CellNumber: args.cellNumber,
             // save properties
         }).then(function (person) {
-        	alert(person.result.Id);
             dataService.Users.register(args.email, args.password, {
                 Email: args.email,
                 PersonID: person.result.Id

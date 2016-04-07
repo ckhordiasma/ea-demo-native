@@ -7,7 +7,7 @@ function pageLoaded(args) {
 
     helpers.platformInit(page);
     page.bindingContext = navigationViewModel;
-    navigationViewModel.set('pageTitle', 'nativeScriptApp');
+    navigationViewModel.set('pageTitle', 'Equine Assistant');
 }
 
 function menuItemTap(args) {

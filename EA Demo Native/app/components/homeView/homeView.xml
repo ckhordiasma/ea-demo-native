@@ -17,7 +17,7 @@
             <widgets:button row="3" colSpan="2" text="Sign In" tap="{{ onSignin }}" />
             <Label row="4" colSpan="2" text="Register" tap="{{ onShowRegister }}" cssClass="form-link" />
         </GridLayout>
-        <GridLayout rows="auto, auto, auto, auto, auto" columns="*, *" visibility="{{ registerVisibility }}">
+        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, *" visibility="{{ registerVisibility }}">
             <Label text="Email" cssClass="form-label" />
             <TextField col="1" text="{{ email }}" cssClass="form-field" />
             <StackLayout colSpan="2" cssClass="form-item-border" />
@@ -26,9 +26,24 @@
             <TextField row="1" col="1" text="{{ password }}" secure="true" cssClass="form-field" />
             <StackLayout row="1" colSpan="2" cssClass="form-item-border" />
 
-
-            <widgets:button row="3" colSpan="2" text="Register" tap="{{ onRegister }}" />
-            <Label row="4" colSpan="2" text="Sign In" tap="{{ onShowSignin }}" cssClass="form-link" />
+            <Label row="2" text="Username" cssClass="form-label" />
+            <TextField row="2" col="1" text="{{ displayName }}" cssClass="form-field" />
+            <StackLayout row="2" colSpan="2" cssClass="form-item-border" />
+             
+            <Label row="3" text="First Name" cssClass="form-label" />
+            <TextField row="3" col="1" text="{{ firstName }}" cssClass="form-field" />
+            <StackLayout row="3" colSpan="2" cssClass="form-item-border" />
+             
+            <Label row="4" text="Last Name" cssClass="form-label" />
+            <TextField row="4" col="1" text="{{ lastName }}" cssClass="form-field" />
+            <StackLayout row="4" colSpan="2" cssClass="form-item-border" />
+             
+            <Label row="5" text="Cell Number" cssClass="form-label" />
+            <TextField row="5" col="1" text="{{ cellNumber }}" cssClass="form-field" />
+            <StackLayout row="5" colSpan="2" cssClass="form-item-border" />
+ 
+            <widgets:button row="6" colSpan="2" text="Register" tap="{{ onRegister }}" />
+            <Label row="7" colSpan="2" text="Sign In" tap="{{ onShowSignin }}" cssClass="form-link" />
         </GridLayout>
         <!-- additional view content -->
 

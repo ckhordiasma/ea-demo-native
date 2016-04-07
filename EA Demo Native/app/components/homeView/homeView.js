@@ -48,7 +48,8 @@ function onSignin(data) {
 }
 
 function registerSuccess() {
-    //on registration success, redirect to the profile input page.
+    alert("Registration Success!");
+    //on registration success, redirect to the profile input page. this doesn't work right now because the profile input page is broken.
     helpers.navigate('components/profileInputPage/profileInputPage');
 }
 
@@ -95,7 +96,6 @@ function pageLoaded(args) {
         isInit = false;
 
         viewModel.on(viewModel.events.signin, onSignin);
-
         viewModel.on(viewModel.events.register, onRegister);
         viewModel.on(viewModel.events.showRegister, onShowRegister);
         viewModel.on(viewModel.events.showSignin, onShowSignin);

@@ -4,7 +4,16 @@ var provider,
 provider = new TelerikBackendServices({
 
     appId: '3ri3zbrvm04135w8',
-    scheme: 'https'
+    scheme: 'https',
+    authentication: {
+            persist: false,
+            onAuthenticationRequired: function() {
+                alert('Your access token has expired. Please log in.');
+                // Redirect to log-in page
+                var topmost = frameModule.topmost();
+                topmost.navigate('components/homeView/homeView');
+            }
+        }
 });
 
 // START_CUSTOM_CODE_eaDemoNative

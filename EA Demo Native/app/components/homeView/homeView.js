@@ -34,13 +34,13 @@ function authError(error) {
 
 function signinSuccess() {
     //helpers.navigate('components/masterDetailView/masterDetailView');
-    
+
     // on sign in success, redirect to the navigation menu with all the various options.
-    helpers.navigate('navigation/navigation');
+    helpers.navigate('components/masterDetailView/masterDetailView');
 }
 
 function onSignin(data) {
-    
+
     if (validateData(data)) {
         data.email = data.email.toLowerCase();
         service.signin(data, signinSuccess, authError);
@@ -51,18 +51,21 @@ function registerSuccess() {
     alert("Registration Success!");
     //on registration success, redirect to the profile input page. this doesn't work right now because the profile input page is broken.
     //helpers.navigate('components/profileInputPage/profileInputPage');
-    
+
     //on registration success, go do navigation menu
     //helpers.navigate('navigation/navigation');
-    
+
     //on registration success, sign in.
 }
 
 function onRegister(data) {
     if (validateData(data)) {
         data.email = data.email.toLowerCase();
-        service.register(data, registerSuccess, authError);
-        service.signin(data, signinSuccess, authError)
+        service.register(data, function () {
+            registerSuccess();
+            service.signin(data, signinSuccess, authError);
+        }, authError);
+
     }
 }
 
@@ -84,7 +87,7 @@ function pageLoaded(args) {
 
     //alert(page.navigationContext);
     //alert(page.navigationContext.logout);
-    
+
     // I think navigationContext and navigationContext.logout are placeholders. 
     /**
     if (page.navigationContext && page.navigationContext.logout) {

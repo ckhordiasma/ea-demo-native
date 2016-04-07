@@ -44,7 +44,7 @@ Service.prototype.signin = function (args, successCallback, errorCallback) {
 Service.prototype.register = function (args, successCallback, errorCallback) {
     validateArgs(args);
 
-    return dataService.data('People').save({
+    return dataService.data('People').create({
             FirstName: args.firstName,
             LastName: args.lastName,
             CellNumber: args.cellNumber,
@@ -52,6 +52,7 @@ Service.prototype.register = function (args, successCallback, errorCallback) {
         }).then(function (person) {
             dataService.Users.register(args.email, args.password, {
                 Email: args.email,
+                DisplayName: args.displayName,
                 PersonID: person.result.Id
             });
         }).then(successCallback, errorCallback);

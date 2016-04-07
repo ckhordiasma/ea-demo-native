@@ -26,7 +26,10 @@ ViewModel = new Observable({
         this.notify({
             eventName: this.events.signin,
             email: this.get('email'),
-            password: this.get('password')
+            password: this.get('password'),
+            firstName: this.get('firstName'),
+            lastName: this.get('lastName'),
+            cellNumber: this.get('cellNumber')
         });
     },
 
@@ -40,7 +43,10 @@ ViewModel = new Observable({
             eventName: this.events.register,
             displayName: this.get('displayName'),
             password: this.get('password'),
-            email: this.get('email')
+            email: this.get('email'),
+            firstName: this.get('firstName'),
+            lastName: this.get('lastName'),
+            cellNumber: this.get('cellNumber')
         });
     },
 

@@ -46,8 +46,7 @@ function onprofileInputPageModelFormCancel() {
 
 // additional functions
 exports.onprofileInputPageModelFormSubmit = function onprofileInputPageModelFormSubmit() {
-    var userID = dataService.Users.id;
-    var data = dataService.Users('userID');
+    var data = dataService.Users;
 
     data.save({
 

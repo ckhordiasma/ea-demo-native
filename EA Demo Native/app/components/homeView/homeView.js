@@ -34,9 +34,31 @@ function authError(error) {
 
 function signinSuccess() {
     //helpers.navigate('components/masterDetailView/masterDetailView');
-
+    /***
+       alert(JSON.stringify(service.getCurrentUser().then(function(data){
+           return data;
+       })));
+       **/
     // on sign in success, redirect to the navigation menu with all the various options.
-    helpers.navigate('components/masterDetailView/masterDetailView');
+    service.getCurrentUser().then(function (data) {
+            alert(JSON.stringify(data));
+            var personFilter = {
+                'PersonID': data.PersonID
+            };
+
+            var navigationEntry = {
+                moduleName: "components/masterDetailView/masterDetailView",
+                context: {
+                    filter: personFilter
+                },
+                animated: false
+            };
+            helpers.navigate(navigationEntry);
+        },
+        function (error) {
+            alert(JSON.stringify(error));
+        });
+
 }
 
 function onSignin(data) {

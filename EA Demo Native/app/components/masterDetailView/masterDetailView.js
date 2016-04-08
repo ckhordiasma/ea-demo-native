@@ -55,7 +55,6 @@ function pageLoaded(args) {
 
     function _fetchData() {
         var context = page.navigationContext;
-
         if (context && context.filter) {
             return service.getAllRecords(context.filter);
         }

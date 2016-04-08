@@ -45,17 +45,17 @@ Service.prototype.register = function (args, successCallback, errorCallback) {
     validateArgs(args);
 
     return dataService.data('People').create({
-            FirstName: args.firstName,
-            LastName: args.lastName,
-            CellNumber: args.cellNumber,
-            // save properties
-        }).then(function (person) {
-            dataService.Users.register(args.email, args.password, {
-                Email: args.email,
-                DisplayName: args.displayName,
-                PersonID: person.result.Id
-            });
-        }).then(successCallback, errorCallback);
+        FirstName: args.firstName,
+        LastName: args.lastName,
+        CellNumber: args.cellNumber,
+        // save properties
+    }).then(function (person) {
+        dataService.Users.register(args.email, args.password, {
+            Email: args.email,
+            DisplayName: args.displayName,
+            PersonID: person.result.Id
+        });
+    }).then(successCallback, errorCallback);
 };
 
 Service.prototype.getCurrentUser = function () {

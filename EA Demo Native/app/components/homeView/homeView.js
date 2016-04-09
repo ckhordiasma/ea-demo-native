@@ -41,9 +41,9 @@ function signinSuccess() {
        **/
     // on sign in success, redirect to the navigation menu with all the various options.
     service.getCurrentUser().then(function (data) {
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
             var personFilter = {
-                'PersonID': data.PersonID
+                'PersonID': data.result.PersonID
             };
 
             var navigationEntry = {

@@ -25,24 +25,24 @@ function onAddItemTap(args) {
 exports.onAddItemTap = onAddItemTap;
 
 function flattenLocationProperties(dataItem) {
-    var propName, propValue,
-        isLocation = function(value) {
-            return propValue && typeof propValue === 'object' &&
-                propValue.longitude && propValue.latitude;
-        };
+        var propName, propValue,
+            isLocation = function (value) {
+                return propValue && typeof propValue === 'object' &&
+                    propValue.longitude && propValue.latitude;
+            };
 
-    for (propName in dataItem) {
-        if (dataItem.hasOwnProperty(propName)) {
-            propValue = dataItem[propName];
-            if (isLocation(propValue)) {
-                dataItem[propName] =
-                    'Latitude: ' + propValue.latitude +
-                    'Longitude: ' + propValue.longitude;
+        for (propName in dataItem) {
+            if (dataItem.hasOwnProperty(propName)) {
+                propValue = dataItem[propName];
+                if (isLocation(propValue)) {
+                    dataItem[propName] =
+                        'Latitude: ' + propValue.latitude +
+                        'Longitude: ' + propValue.longitude;
+                }
             }
         }
     }
-}
-// additional functions
+    // additional functions
 
 function pageLoaded(args) {
     var page = args.object;
@@ -55,6 +55,7 @@ function pageLoaded(args) {
 
     function _fetchData() {
         var context = page.navigationContext;
+        //alert(JSON.stringify(context));
         if (context && context.filter) {
             return service.getAllRecords(context.filter);
         }
@@ -63,23 +64,19 @@ function pageLoaded(args) {
     };
 
     _fetchData()
-        .then(function(result) {
+        .then(function (result) {
             var itemsList = [];
 
-            result.forEach(function(item) {
+            result.forEach(function (item) {
 
                 flattenLocationProperties(item);
 
                 itemsList.push({
 
                     icon: '\ue0dc', //globe
-
                     image: item.Image,
-
                     header: item.Breed,
-
                     description: item.Breed,
-
                     details: item
                 });
             });

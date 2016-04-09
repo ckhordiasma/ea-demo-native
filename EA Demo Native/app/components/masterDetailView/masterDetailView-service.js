@@ -68,7 +68,12 @@ Service.prototype.getAllRecords = function (filter) {
                             alert(JSON.stringify(horseCoverages[0].HorseID));
                             //alert(JSON.stringify(horseCoverages[0].HorseId));
                             //horseFilter.where().eq('Id', horseCoverages[0].HorseID);
-                            horseFilter.where().eq('Id', 'd06bf470-fe9b-11e5-9c87-3db929b3ef2e')
+                            var horseIDsList = [];
+                            horseCoverages.forEach(function (horseCoverage) {
+                                horseIDsList.push(horseCoverage.HorseID);
+                            });
+                        
+                            horseFilter.where().isin('Id', horseIDsList)
                                 .then(function () {
                                     horseData.expand(expandExp).get(horseFilter)
                                         .then(onRequestSuccess.bind(this))

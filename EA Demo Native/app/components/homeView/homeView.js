@@ -43,7 +43,8 @@ function signinSuccess() {
     service.getCurrentUser().then(function (data) {
             //alert(JSON.stringify(data));
             var personFilter = {
-                'PersonID': data.result.PersonID
+                'PersonID': data.result.PersonID,
+                'Role': 'HorseOwner'
             };
 
             var navigationEntry = {

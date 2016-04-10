@@ -6,7 +6,7 @@ var isInit = true,
     // additional requires
 
     viewModel = require('./profileInputPage-view-model');
-	dataService = require('../../../dataProviders/eaDemoNative');
+var dataService = require('../../../dataProviders/eaDemoNative');
 
 function validateData(data) {
     if (!data.firstName) {
@@ -18,7 +18,7 @@ function validateData(data) {
         alert('Missing last name');
         return false;
     }
-    
+
     if (!data.cellNumber) {
         alert('Missing cell phone number');
         return false;
@@ -37,27 +37,38 @@ function authError(error) {
     }
 }
 
-//function onprofileInputPageModelFormSubmit() {
-//}
+function onprofileInputPageModelFormSubmit() {
+    /**
+    var data = dataService.data('People');
+
+    function _getCurrentUser() {
+        return dataService.Users.currentUser();
+    };
+
+    _getCurrentUser().then(function (userResult) {
+        data.save({
+
+                Id: userResult.result.PersonID,
+                FirstName: viewModel.get('firstName'),
+                LastName: viewModel.get('lastName'),
+                CellNumber: viewModel.get('cellNumber'),
+
+            })
+            .then(onRequestSuccess.bind(this))
+            .catch(onRequestFail.bind(this));
+
+    });
+    **/
+    helpers.back();
+}
 
 function onprofileInputPageModelFormCancel() {
     helpers.back();
 }
 
 // additional functions
-exports.onprofileInputPageModelFormSubmit = function onprofileInputPageModelFormSubmit() {
-    var data = dataService.Users;
-
-    data.save({
-
-            FirstName: viewModel.get('firstName'),
-            LastName: viewModel.get('lastName'),
-            CellNumber: viewModel.get('cellNumber'),
-
-        })
-        .then(onRequestSuccess.bind(this))
-        .catch(onRequestFail.bind(this));
-};
+exports.onprofileInputPageModelFormSubmit = onprofileInputPageModelFormSubmit;
+exports.onprofileInputPageModelFormCancel = onprofileInputPageModelFormCancel;
 
 function pageLoaded(args) {
     var page = args.object;

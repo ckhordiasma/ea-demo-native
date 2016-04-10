@@ -20,9 +20,9 @@ exports.onCancelTap = function onCancelTap() {
 };
 
 exports.onSaveTap = function onSaveTap() {
-    var data = dataService.data('Horses');
+    var horseData = dataService.data('Horses');
 
-    data.save({
+    horseData.save({
 
             Name: viewModel.get('name'),
 

@@ -68,7 +68,7 @@ function pageLoaded(args) {
             var itemsList = [];
 
             result.forEach(function (item) {
-
+				//alert(item.Breed);
                 flattenLocationProperties(item);
 
                 itemsList.push({

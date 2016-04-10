@@ -42,55 +42,44 @@ Service.prototype.getAllRecords = function (filter) {
     };
 
 
-    ownerRoleTypeFilter.select('Id').where().eq('Name', 'HorseOwner');
+    ownerRoleTypeFilter.select('Id').where().eq('Name', filter.Role);
     return roleTypeData.get(ownerRoleTypeFilter)
         .then(onRequestSuccess.bind(this))
         .catch(onRequestFail.bind(this))
         .then(function (roles) {
             // there should only be one role selected (i think), so accessing the first element's ID.
             //alert(JSON.stringify(roles[0].id))
-            membershipFilter.select('Id').where().and().eq('PersonID', filter.PersonID).eq('RoleTypeID', roles[0].Id);
+            return membershipFilter.select('Id').where().and().eq('PersonID', filter.PersonID).eq('RoleTypeID', roles[0].Id);
+        }).then(function () {
+            return membershipData.get(membershipFilter)
+                .then(onRequestSuccess.bind(this))
+                .catch(onRequestFail.bind(this));
+
+        }).then(function (memberships) {
+            //alert(JSON.stringify(memberships[0].Id));
+            //alert(JSON.stringify(memberships));
+            return horseCoverageFilter.select('HorseID').where().eq('MembershipID', memberships[0].Id);
+        }).then(function () {
+            return horseCoverageData.get(horseCoverageFilter)
+                .then(onRequestSuccess.bind(this))
+                .catch(onRequestFail.bind(this));
+
+        }).then(function (horseCoverages) {
+            //alert(JSON.stringify(horseCoverages[0].HorseID));
+            //alert(JSON.stringify(horseCoverages[0].HorseId));
+            //horseFilter.where().eq('Id', horseCoverages[0].HorseID);
+            var horseIDsList = [];
+            horseCoverages.forEach(function (horseCoverage) {
+                horseIDsList.push(horseCoverage.HorseID);
+            });
+
+            return horseFilter.where().isin('Id', horseIDsList);
 
         }).then(function () {
-
-            membershipData.get(membershipFilter)
+            return horseData.expand(expandExp).get(horseFilter)
                 .then(onRequestSuccess.bind(this))
-                .catch(onRequestFail.bind(this))
-                .then(function (memberships) {
-                    //alert(JSON.stringify(memberships[0].Id));
-                    //alert(JSON.stringify(memberships));
-                    horseCoverageFilter.select('HorseID').where().eq('MembershipID', memberships[0].Id);
-                }).then(function () {
-                    horseCoverageData.get(horseCoverageFilter)
-                        .then(onRequestSuccess.bind(this))
-                        .catch(onRequestFail.bind(this))
-                        .then(function (horseCoverages) {
-                            alert(JSON.stringify(horseCoverages[0].HorseID));
-                            //alert(JSON.stringify(horseCoverages[0].HorseId));
-                            //horseFilter.where().eq('Id', horseCoverages[0].HorseID);
-                            var horseIDsList = [];
-                            horseCoverages.forEach(function (horseCoverage) {
-                                horseIDsList.push(horseCoverage.HorseID);
-                            });
-                        
-                            horseFilter.where().isin('Id', horseIDsList)
-                                .then(function () {
-                                    horseData.expand(expandExp).get(horseFilter)
-                                        .then(onRequestSuccess.bind(this))
-                                        .catch(onRequestFail.bind(this));
-                                });
-
-                        });
-
-                });
+                .catch(onRequestFail.bind(this));
         });
-
-
-
-
-
-
-
 
 };
 // additional properties

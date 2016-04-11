@@ -32,6 +32,8 @@ Service.prototype.addHorse = function (args, successCallback, errorCallback) {
 
     ownerRoleTypeFilter.select('Id').where().eq('Name', 'HorseOwner');
 
+    var roleID, personID, horseID;
+
     return horseData.create({
             Name: args.name,
             Breed: args.breed,
@@ -41,35 +43,44 @@ Service.prototype.addHorse = function (args, successCallback, errorCallback) {
         .then(onRequestSuccess.bind(this))
         .catch(onRequestFail.bind(this))
         .then(function (horse) {
-            //alert('Horse ID: ' + horse.Id);
-
-            return roleTypeData.get(ownerRoleTypeFilter)
+            alert('Horse ID: ' + horse.Id);
+            horseID = horse.Id;
+            return horseID;
+        })
+        .then(roleTypeData.get(ownerRoleTypeFilter))
+        .then(onRequestSuccess.bind(this))
+        .catch(onRequestFail.bind(this))
+        .then(function (roles) {
+            // there should only be one role selected (i think), so accessing the first element's ID.
+            //alert('Role ID: ' + roles[0].Id);
+            roleID = roles[0].Id;
+            return roleID;
+        })
+        .then(function () {
+            return dataService.Users.currentUser()
                 .then(onRequestSuccess.bind(this))
-                .catch(onRequestFail.bind(this))
-                .then(function (roles) {
-                    // there should only be one role selected (i think), so accessing the first element's ID.
-                    //alert('Role ID: ' + roles[0].Id);
-
-                    dataService.Users.currentUser()
-                        .then(onRequestSuccess.bind(this))
-                        .catch(onRequestFail.bind(this))
-                        .then(function (user) {
-                        	alert('User ID: ' + user.Id);
-                        	alert('Role ID: ' + roles[0].Id);
-                            return membershipFilter.select('Id').where().and().eq('PersonID', user.Id).eq('RoleTypeID', roles[0].Id);
-                        }).then(membershipData.get);
-                })
-                .then(onRequestSuccess.bind(this))
-                .catch(onRequestFail.bind(this))
-                .then(function (memberships) {
-                    //alert('Membership ID: ' + memberships[0].Id);
-                    //alert(JSON.stringify(memberships));
-                    return horseCoverageData.create({
-                        'HorseID': horse.Id,
-                        'MembershipID': memberships[0].Id
-                    })
-                })
-                .then(successCallback, errorCallback);
+                .catch(onRequestFail.bind(this));
+        }).then(function (user) {
+            personID = user.PersonID;
+            return personID;
+        }).then(function (user) {
+            alert('User ID: ' + personID);
+            alert('Role ID: ' + roleID);
+            return membershipFilter.select('Id').where().and().eq('PersonID', personID).eq('RoleTypeID', roleID);
+        }, alert('Error generating Membership Query'))
+        .then(function () {
+            return membershipData.get(membershipFilter);
+        }, alert('Error with obtaining membership data'))
+        .then(onRequestSuccess.bind(this))
+        .catch(onRequestFail.bind(this))
+        .then(function (memberships) {
+            alert('Membership ID: ' + memberships[0].Id);
+            //alert(JSON.stringify(memberships));
+            return horseCoverageData.create({
+                'HorseID': horseID,
+                'MembershipID': memberships[0].Id
+            })
+            .then(successCallback, errorCallback);
 
         });
 }

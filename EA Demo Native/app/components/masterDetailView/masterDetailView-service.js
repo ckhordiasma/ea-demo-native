@@ -8,6 +8,13 @@ var _,
 
     consts;
 
+consts = {
+    PersonID: 'personID',
+    UserID: 'userID',
+    MembershipID: 'membershipID',
+    RoleID: 'roleID'
+};
+
 function Service() {}
 
 function onRequestSuccess(data) {
@@ -18,6 +25,20 @@ function onRequestFail(err) {
     alert(JSON.stringify(err));
     return err;
 }
+
+Service.prototype.getCurrentUser = function () {
+    return dataService.Users.currentUser();
+};
+
+Service.prototype.getCurrentMembership = function () {
+    return dataService.Users.currentUser();
+};
+
+Service.prototype.getCurrentUser = function () {
+    return dataService.Users.currentUser();
+};
+
+
 
 Service.prototype.getAllRecords = function (filter) {
     var expandExp,

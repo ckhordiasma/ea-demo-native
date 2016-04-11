@@ -5,14 +5,32 @@ var ViewModel,
 
 ViewModel = new Observable({
 
-    name: '',
+    name: 'Z Horse',
 
-    breed: '',
+    breed: 'Zebra',
 
-    height: '',
+    height: '14',
 
+    
+    //not working!
+    
+    events: {
+        nothing: 'NOTHING',
+        addHorse: 'addHorse'
+    },
+	
+    
     // additional properties
-
+    onAddHorse: function () {
+        alert('View Model onAddHorse()');
+        this.notify({
+            eventName: this.events.addHorse,
+            name: this.get('name')/**,
+            breed: this.get('breed'),
+            height: this.get('height')**/
+        });
+    }
+    
 });
 
 // START_CUSTOM_CODE_masterDetailViewModel

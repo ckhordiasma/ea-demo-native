@@ -75,8 +75,9 @@ function pageLoaded(args) {
 
                     icon: '\ue0dc', //globe
                     image: item.Image,
-                    header: item.Breed,
-                    description: item.Breed,
+                    name: item.Name,
+                    breed: item.Breed,
+                    height: item.Height + ' Hands',
                     details: item
                 });
             });

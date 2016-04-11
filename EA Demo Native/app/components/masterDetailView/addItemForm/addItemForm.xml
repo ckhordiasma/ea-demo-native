@@ -4,8 +4,8 @@
             <GridLayout cssClass="action-bar" columns="auto, *, auto">
                 <Button text="Cancel" onTap="onCancelTap" />
                 <Label col="1" text="Add" cssClass="action-bar-title" />
-                <Button col="2" text="Save" onTap="onSaveTap" />
-            </GridLayout>
+                <Button col="2" text="Save" onTap="onAddHorse" />
+             </GridLayout>
             <!-- Workaround for one sided border -->
             <StackLayout row="1" cssClass="action-bar-border" height="1"></StackLayout>
         </GridLayout>

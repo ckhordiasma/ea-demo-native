@@ -6,6 +6,7 @@ var ViewModel,
 ViewModel = new Observable({
 
     pageTitle: 'Horses',
+    backButtonHidden: true,
 
     isLoading: false,
     listItems: [],

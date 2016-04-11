@@ -4,7 +4,8 @@ var isInit = true,
     helpers = require('../../../utils/widgets/helper'),
     // additional requires
     dataService = require('../../../dataProviders/eaDemoNative'),
-    viewModel = require('./addItemForm-view-model');
+    viewModel = require('./addItemForm-view-model'),
+    horseService = require('./addItemForm-service');
 
 function onRequestSuccess() {
     helpers.back();
@@ -19,23 +20,20 @@ exports.onCancelTap = function onCancelTap() {
     helpers.back();
 };
 
-exports.onSaveTap = function onSaveTap() {
-    var horseData = dataService.data('Horses');
+function onAddHorse(data) {
+    
+    //alert(data.name);
+    var horseData = {
+        name: viewModel.name,
+        breed: viewModel.breed,
+        height: viewModel.height
+    }
+        
+    
+    horseService.addHorse(horseData, onRequestSuccess, onRequestFail);
+}
 
-    horseData.save({
-
-            Name: viewModel.get('name'),
-
-            Breed: viewModel.get('breed'),
-
-            Height: viewModel.get('height'),
-
-            // save properties
-
-        })
-        .then(onRequestSuccess.bind(this))
-        .catch(onRequestFail.bind(this));
-};
+exports.onAddHorse  = onAddHorse;
 
 // additional functions
 function pageLoaded(args) {
@@ -44,15 +42,20 @@ function pageLoaded(args) {
     helpers.platformInit(page);
 
     viewModel.set('name', '');
-
     viewModel.set('breed', '');
-
     viewModel.set('height', '');
 
     // init properties
 
     page.bindingContext = viewModel;
-
+    
+    //just some stuff I copied from homeview, not sure if it is right.
+    
+    if (isInit) {
+        isInit = false;
+        viewModel.on(viewModel.events.addHorse, onAddHorse);
+    } 
+    
     // additional pageLoaded
 }
 

@@ -3,25 +3,21 @@
         <widgets:action-bar />
     </Page.actionBar>
 
-    <GridLayout rows="auto, *">
-        <GridLayout rows="auto" columns="*, *">
+    <GridLayout rows="auto, auto">
+        <Image width="300" height="300" src="{{ Image }}" />
+        <GridLayout row="1" rows="auto, auto, auto" columns="*, *" >
+            <Label text="Name" cssClass="form-label" />
+            <Label col="1" text="{{Name}}" cssClass="form-field" />
+            <StackLayout colSpan="2" cssClass="form-item-border" />
 
+            <Label row="1" text="Breed" cssClass="form-label" />
+            <Label row="1" col="1" text="{{Breed}}" cssClass="form-field" />
+            <StackLayout row="1" colSpan="2" cssClass="form-item-border" />
+            
+            <Label row="2" text="Height" cssClass="form-label" />
+            <Label row="2" col="1" text="{{Height}}" cssClass="form-field" />
+            <StackLayout row="2" colSpan="2" cssClass="form-item-border" />
+       </GridLayout>
 
-        </GridLayout>
-        <StackLayout row="1">
-
-            <Image width="100" height="100" src="{{ Image }}" />
-
-
-            <Label text="{{ Name }}" />
-
-
-            <Label text="{{ Breed }}" />
-
-
-            <TextView text="{{ Height }}" editable="false" />
-
-            <!-- additional view content -->
-        </StackLayout>
     </GridLayout>
 </Page>

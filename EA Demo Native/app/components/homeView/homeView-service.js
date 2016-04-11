@@ -28,7 +28,7 @@ function validateArgs(args) {
 Service.prototype.signin = function (args, successCallback, errorCallback) {
     validateArgs(args);
 
-    return dataService.Users.login(args.email, args.password)
+    return dataService.Users.login(args.email.trim(), args.password)
         .then(function (e) {
             localSettings.setString(consts.accessTokenKey,
                 e.result.access_token);

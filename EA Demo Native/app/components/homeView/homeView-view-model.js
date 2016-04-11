@@ -12,8 +12,8 @@ ViewModel = new Observable({
     signinVisibility: 'visible',
     registerVisibility: 'collapsed',
     displayName: '',
-    email: '',
-    password: '',
+    email: 'Q@aol.com',
+    password: 'test',
 
     events: {
         register: 'register',

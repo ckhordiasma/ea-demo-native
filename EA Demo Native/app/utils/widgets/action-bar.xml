@@ -2,7 +2,7 @@
     
     <!-- Android: looks like a back button. iPhone: "BACK" button. -->
     <NavigationButton text="Back" 
-        tap="onIndex" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}" android.systemIcon="ic_menu_back">
+        tap="onBack" visibility="{{ backButtonHidden ? 'collapsed' : 'visible' }}" android.systemIcon="ic_menu_back">
     </NavigationButton>
 
 

@@ -5,6 +5,7 @@ var isInit = true,
     // additional requires
     dataService = require('../../../dataProviders/eaDemoNative'),
     viewModel = require('./addHorseForm-view-model'),
+
     horseService = require('./addHorseForm-service');
 
 function onRequestSuccess() {
@@ -17,23 +18,24 @@ function onRequestFail(err) {
 }
 
 exports.onCancelTap = function onCancelTap() {
+    
     helpers.back();
 };
 
 function onAddHorse(data) {
-    
+
     //alert(data.name);
     var horseData = {
         name: viewModel.name,
         breed: viewModel.breed,
         height: viewModel.height
     }
-        
-    
+
+
     horseService.addHorse(horseData, onRequestSuccess, onRequestFail);
 }
 
-exports.onAddHorse  = onAddHorse;
+exports.onAddHorse = onAddHorse;
 
 // additional functions
 function pageLoaded(args) {
@@ -48,14 +50,14 @@ function pageLoaded(args) {
     // init properties
 
     page.bindingContext = viewModel;
-    
+
     //just some stuff I copied from homeview, not sure if it is right.
-    
+
     if (isInit) {
         isInit = false;
         viewModel.on(viewModel.events.addHorse, onAddHorse);
-    } 
-    
+    }
+
     // additional pageLoaded
 }
 

@@ -3,17 +3,12 @@ var _,
 
     _consts,
     dataService = require('../../dataProviders/eaDemoNative'),
-    Everlive = require('../../everlive/everlive.all.min.js'),
+    Everlive = require('../../everlive/everlive.all.min.js');
     // additional requires
 
-    consts;
+    
 
-consts = {
-    PersonID: 'personID',
-    UserID: 'userID',
-    MembershipID: 'membershipID',
-    RoleID: 'roleID'
-};
+
 
 function Service() {}
 
@@ -26,33 +21,16 @@ function onRequestFail(err) {
     return err;
 }
 
-Service.prototype.getCurrentUser = function () {
-    return dataService.Users.currentUser();
-};
-
-Service.prototype.getCurrentMembership = function () {
-    return dataService.Users.currentUser();
-};
-
-Service.prototype.getCurrentUser = function () {
-    return dataService.Users.currentUser();
-};
-
-
 
 Service.prototype.getAllRecords = function (filter) {
+
     var expandExp,
         horseData = dataService.data('Horses'),
-        horseCoverageData = dataService.data('HorseCoverage'),
-        membershipData = dataService.data('Memberships'),
-        roleTypeData = dataService.data('RoleTypes');
+        horseCoverageData = dataService.data('HorseCoverage');
 
-    var ownerRoleTypeFilter = new Everlive.Query();
-    var membershipFilter = new Everlive.Query();
-    var horseCoverageFilter = new Everlive.Query();
     var horseFilter = new Everlive.Query();
+    var horseCoverageFilter = new Everlive.Query();
 
-    //alert((filter.PersonID));
 
     expandExp = {
 
@@ -63,32 +41,13 @@ Service.prototype.getAllRecords = function (filter) {
     };
 
 
-    ownerRoleTypeFilter.select('Id').where().eq('Name', filter.Role);
-    return roleTypeData.get(ownerRoleTypeFilter)
+    horseCoverageFilter.select('HorseID').where().eq('MembershipID', filter.MembershipID);
+
+    return horseCoverageData.get(horseCoverageFilter)
         .then(onRequestSuccess.bind(this))
         .catch(onRequestFail.bind(this))
-        .then(function (roles) {
-            // there should only be one role selected (i think), so accessing the first element's ID.
-            //alert(JSON.stringify(roles[0].id))
-            return membershipFilter.select('Id').where().and().eq('PersonID', filter.PersonID).eq('RoleTypeID', roles[0].Id);
-        }).then(function () {
-            return membershipData.get(membershipFilter)
-                .then(onRequestSuccess.bind(this))
-                .catch(onRequestFail.bind(this));
+        .then(function (horseCoverages) {
 
-        }).then(function (memberships) {
-            //alert(JSON.stringify(memberships[0].Id));
-            //alert(JSON.stringify(memberships));
-            return horseCoverageFilter.select('HorseID').where().eq('MembershipID', memberships[0].Id);
-        }).then(function () {
-            return horseCoverageData.get(horseCoverageFilter)
-                .then(onRequestSuccess.bind(this))
-                .catch(onRequestFail.bind(this));
-
-        }).then(function (horseCoverages) {
-            //alert(JSON.stringify(horseCoverages[0].HorseID));
-            //alert(JSON.stringify(horseCoverages[0].HorseId));
-            //horseFilter.where().eq('Id', horseCoverages[0].HorseID);
             var horseIDsList = [];
             horseCoverages.forEach(function (horseCoverage) {
                 horseIDsList.push(horseCoverage.HorseID);
@@ -101,6 +60,8 @@ Service.prototype.getAllRecords = function (filter) {
                 .then(onRequestSuccess.bind(this))
                 .catch(onRequestFail.bind(this));
         });
+
+
 
 };
 // additional properties

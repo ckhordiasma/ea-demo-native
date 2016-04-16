@@ -32,7 +32,7 @@ function authError(error) {
     }
 }
 
-function signinSuccess() {
+function signinSuccess(personRoleMembershipData) {
     //helpers.navigate('components/masterDetailView/masterDetailView');
     /***
        alert(JSON.stringify(service.getCurrentUser().then(function(data){
@@ -40,17 +40,15 @@ function signinSuccess() {
        })));
        **/
     // on sign in success, redirect to the navigation menu with all the various options.
+    //alert(JSON.stringify(personRoleMembershipData));
     service.getCurrentUser().then(function (data) {
             //alert(JSON.stringify(data));
-            var personFilter = {
-                'PersonID': data.result.PersonID,
-                'Role': 'HorseOwner'
-            };
+            
 
             var navigationEntry = {
                 moduleName: "components/horseView/horseView",
                 context: {
-                    filter: personFilter
+                    filter: personRoleMembershipData
                 },
                 animated: false
             };

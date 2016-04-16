@@ -4,8 +4,19 @@ var isInit = true,
 
     service = require('./horseView-service'),
     // additional requires
-
+    localSettings = require('application-settings'),
+    consts,
     viewModel = require('./horseView-view-model');
+
+
+consts = {
+    accessTokenKey: 'accessTokenType',
+    accessTokenTypeKey: 'accessTokenType',
+    accessTokenPrincipalIdKey: 'accessTokenPrincipalId',
+    personIdKey: 'personId',
+    membershipIdKey: 'membershipId',
+    roleIdKey: 'roleId'
+};
 
 function onListViewItemTap(args) {
     var itemData = viewModel.get('listItems')[args.index];
@@ -18,31 +29,34 @@ function onListViewItemTap(args) {
 exports.onListViewItemTap = onListViewItemTap;
 
 function onAddItemTap(args) {
+    
+    
     helpers.navigate({
-        moduleName: 'components/horseView/addHorseForm/addHorseForm'
+        moduleName: 'components/horseView/addHorseForm/addHorseForm',
+        
     });
 }
 exports.onAddItemTap = onAddItemTap;
 
 function flattenLocationProperties(dataItem) {
-        var propName, propValue,
-            isLocation = function (value) {
-                return propValue && typeof propValue === 'object' &&
-                    propValue.longitude && propValue.latitude;
-            };
+    var propName, propValue,
+        isLocation = function (value) {
+            return propValue && typeof propValue === 'object' &&
+                propValue.longitude && propValue.latitude;
+        };
 
-        for (propName in dataItem) {
-            if (dataItem.hasOwnProperty(propName)) {
-                propValue = dataItem[propName];
-                if (isLocation(propValue)) {
-                    dataItem[propName] =
-                        'Latitude: ' + propValue.latitude +
-                        'Longitude: ' + propValue.longitude;
-                }
+    for (propName in dataItem) {
+        if (dataItem.hasOwnProperty(propName)) {
+            propValue = dataItem[propName];
+            if (isLocation(propValue)) {
+                dataItem[propName] =
+                    'Latitude: ' + propValue.latitude +
+                    'Longitude: ' + propValue.longitude;
             }
         }
     }
-    // additional functions
+}
+// additional functions
 
 function pageLoaded(args) {
     var page = args.object;
@@ -68,7 +82,7 @@ function pageLoaded(args) {
             var itemsList = [];
 
             result.forEach(function (item) {
-				//alert(item.Breed);
+                //alert(item.Breed);
                 flattenLocationProperties(item);
 
                 itemsList.push({

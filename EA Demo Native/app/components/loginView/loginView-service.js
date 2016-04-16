@@ -12,7 +12,10 @@ function Service() {}
 consts = {
     accessTokenKey: 'accessTokenType',
     accessTokenTypeKey: 'accessTokenType',
-    accessTokenPrincipalIdKey: 'accessTokenPrincipalId'
+    accessTokenPrincipalIdKey: 'accessTokenPrincipalId',
+    personIdKey: 'personId',
+    membershipIdKey: 'membershipId',
+    roleIdKey: 'roleId'
 };
 
 function validateArgs(args) {
@@ -27,9 +30,11 @@ function validateArgs(args) {
 
 Service.prototype.signin = function (args, successCallback, errorCallback) {
     validateArgs(args);
+    var personID, roleID, membershipID;
 
     return dataService.Users.login(args.email.trim(), args.password)
         .then(function (e) {
+
             localSettings.setString(consts.accessTokenKey,
                 e.result.access_token);
             localSettings.setString(consts.accessTokenTypeKey,
@@ -37,7 +42,43 @@ Service.prototype.signin = function (args, successCallback, errorCallback) {
             localSettings.setString(consts.accessTokenPrincipalIdKey,
                 e.result.principal_id);
 
-            successCallback();
+
+            dataService.data('RoleTypes').get({
+                'Name': 'HorseOwner'
+            }).then(function (roleData) {
+                //alert(roleData.result[0].Id);
+
+                roleID = roleData.result[0].Id;
+
+                //alert('User ID: ' + e.result.principal_id);
+                //alert('Role ID: ' + roleID);
+
+                return localSettings.setString(consts.roleIdKey, roleID);
+
+            }).then(function () {
+                return dataService.Users.getById(e.result.principal_id);
+            }).then(function (userData) {
+                personID = userData.result.PersonID;
+                return localSettings.setString(consts.personIdKey, personID);
+            }).then(function () {
+
+                return dataService.data('Memberships').get({
+                    'PersonID': personID,
+                    'RoleTypeID': roleID
+                });
+
+            }).then(function (membershipData) {
+                membershipID = membershipData.result[0].Id;
+                //alert('Membership ID: ' + membershipID);
+                return localSettings.setString(consts.membershipIdKey, membershipID);
+            }).then(function () {
+                successCallback({
+                    'PersonID': personID,
+                    'RoleTypeID': roleID,
+                    'MembershipID': membershipID
+                });
+            });
+
         }, errorCallback);
 };
 

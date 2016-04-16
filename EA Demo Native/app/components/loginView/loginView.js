@@ -2,11 +2,11 @@
 var isInit = true,
     helpers = require('../../utils/widgets/helper'),
 
-    service = require('./homeView-service'),
+    service = require('./loginView-service'),
     localSettings = require('application-settings'),
     // additional requires
 
-    viewModel = require('./homeView-view-model');
+    viewModel = require('./loginView-view-model');
 
 function validateData(data) {
     if (!data.email) {
@@ -48,7 +48,7 @@ function signinSuccess() {
             };
 
             var navigationEntry = {
-                moduleName: "components/masterDetailView/masterDetailView",
+                moduleName: "components/horseView/horseView",
                 context: {
                     filter: personFilter
                 },

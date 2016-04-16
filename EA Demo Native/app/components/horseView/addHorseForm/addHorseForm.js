@@ -4,8 +4,8 @@ var isInit = true,
     helpers = require('../../../utils/widgets/helper'),
     // additional requires
     dataService = require('../../../dataProviders/eaDemoNative'),
-    viewModel = require('./addItemForm-view-model'),
-    horseService = require('./addItemForm-service');
+    viewModel = require('./addHorseForm-view-model'),
+    horseService = require('./addHorseForm-service');
 
 function onRequestSuccess() {
     helpers.back();

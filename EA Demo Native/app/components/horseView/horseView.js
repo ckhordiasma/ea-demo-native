@@ -2,16 +2,16 @@
 var isInit = true,
     helpers = require('../../utils/widgets/helper'),
 
-    service = require('./masterDetailView-service'),
+    service = require('./horseView-service'),
     // additional requires
 
-    viewModel = require('./masterDetailView-view-model');
+    viewModel = require('./horseView-view-model');
 
 function onListViewItemTap(args) {
     var itemData = viewModel.get('listItems')[args.index];
 
     helpers.navigate({
-        moduleName: 'components/masterDetailView/itemDetails/itemDetails',
+        moduleName: 'components/horseView/horseDetails/horseDetails',
         context: itemData.details
     });
 }
@@ -19,7 +19,7 @@ exports.onListViewItemTap = onListViewItemTap;
 
 function onAddItemTap(args) {
     helpers.navigate({
-        moduleName: 'components/masterDetailView/addItemForm/addItemForm'
+        moduleName: 'components/horseView/addHorseForm/addHorseForm'
     });
 }
 exports.onAddItemTap = onAddItemTap;

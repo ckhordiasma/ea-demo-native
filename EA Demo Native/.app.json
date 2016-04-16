@@ -1,7 +1,187 @@
 {
   "type": "NativeScript",
-  "views": [],
-  "dataProviders": [],
+  "views": [
+    {
+      "type": "NativeScript:view",
+      "name": "homeView",
+      "components": [
+        {
+          "type": "NativeScript:authentication",
+          "name": "homeViewModel",
+          "dataProvider": "eaDemoNative",
+          "emailLabel": "Email",
+          "passwordLabel": "Password",
+          "signinLabel": "Sign In",
+          "signinRedirect": "masterDetailView",
+          "enableRegistration": true,
+          "gotoRegisterLabel": "Register",
+          "registerEmailLabel": "Email",
+          "registerPasswordLabel": "Password",
+          "registerLabel": "Register",
+          "registerRedirect": "profileInputPage",
+          "gotoSigninLabel": "Sign In",
+          "enableLogout": false,
+          "enableRememberme": false
+        }
+      ],
+      "title": "Home View",
+      "addToNavigation": true,
+      "icon": "home"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "formView",
+      "components": [
+        {
+          "type": "NativeScript:form",
+          "components": [
+            {
+              "type": "NativeScript:field",
+              "name": "username",
+              "title": "Username",
+              "inputType": "text",
+              "titlePosition": "top"
+            },
+            {
+              "type": "NativeScript:field",
+              "name": "password",
+              "title": "Password",
+              "inputType": "password",
+              "titlePosition": "top"
+            }
+          ],
+          "name": "formViewModel",
+          "submitButton": "Confirm",
+          "cancelButton": "Cancel"
+        }
+      ],
+      "title": "Form",
+      "addToNavigation": true,
+      "icon": "bookmarks"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "masterDetailView",
+      "components": [
+        {
+          "type": "NativeScript:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [
+            {
+              "type": "NativeScript:editableListForm",
+              "components": [
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "name",
+                  "title": "Name",
+                  "inputType": "text",
+                  "dataBinding": "Name"
+                },
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "breed",
+                  "title": "Breed",
+                  "inputType": "text",
+                  "dataBinding": "Breed"
+                },
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "height",
+                  "title": "Height",
+                  "inputType": "text",
+                  "dataBinding": "Height"
+                }
+              ],
+              "name": "editableListForm2",
+              "formType": "add"
+            },
+            {
+              "type": "NativeScript:editableListForm",
+              "components": [
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "name",
+                  "title": "Name",
+                  "inputType": "shortText",
+                  "dataBindingOptional": "Name"
+                }
+              ],
+              "name": "editableListForm10",
+              "formType": "list"
+            }
+          ],
+          "name": "masterDetailViewModel",
+          "dataProvider": "eaDemoNative",
+          "collection": "Horses",
+          "headerField": "Breed",
+          "imageField": "Image",
+          "subHeaderField": "Breed",
+          "iconField": true,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "detailHeaderField": "Name",
+          "detailSubHeaderField": "Breed",
+          "detailDescriptionField": "Height",
+          "detailImageField": "Image",
+          "addItemForm": true,
+          "editItemForm": false
+        }
+      ],
+      "title": "Horses",
+      "addToNavigation": true,
+      "icon": "contacts"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "profileInputPage",
+      "components": [
+        {
+          "type": "NativeScript:form",
+          "components": [
+            {
+              "type": "NativeScript:field",
+              "name": "firstName",
+              "title": "First Name",
+              "inputType": "text",
+              "titlePosition": "left"
+            },
+            {
+              "type": "NativeScript:field",
+              "name": "lastName",
+              "title": "Last Name",
+              "inputType": "text",
+              "titlePosition": "left"
+            },
+            {
+              "type": "NativeScript:field",
+              "name": "cellNumber",
+              "title": "Cell Number",
+              "inputType": "text",
+              "titlePosition": "left"
+            }
+          ],
+          "name": "profileInputPageModel",
+          "submitButton": "Confirm",
+          "cancelButton": "Cancel"
+        }
+      ],
+      "title": "Profile",
+      "addToNavigation": true,
+      "icon": "contacts"
+    }
+  ],
+  "dataProviders": [
+    {
+      "type": "NativeScript:dataProvider",
+      "name": "eaDemoNative",
+      "title": "EA Demo Native / EA Demo Native",
+      "source": "everlive",
+      "everliveKey": "3ri3zbrvm04135w8",
+      "offlineStorage": false
+    }
+  ],
   "name": "nativeScriptApp",
   "navigation": "none",
   "view": "homeView",

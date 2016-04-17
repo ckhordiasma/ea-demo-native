@@ -18,7 +18,7 @@ function onRequestFail(err) {
 }
 
 exports.onCancelTap = function onCancelTap() {
-    
+
     helpers.back();
 };
 
@@ -26,9 +26,9 @@ function onAddHorse(data) {
 
     //alert(data.name);
     var horseData = {
-        name: viewModel.name,
-        breed: viewModel.breed,
-        height: viewModel.height
+        name: data.name,
+        breed: data.breed,
+        height: data.height
     }
 
 
@@ -37,16 +37,22 @@ function onAddHorse(data) {
 
 exports.onAddHorse = onAddHorse;
 
+function onAddHorsePic() {
+    alert('adding horse pic!');
+}
+exports.onAddHorsePic = onAddHorsePic;
+
 // additional functions
 function pageLoaded(args) {
     var page = args.object;
 
     helpers.platformInit(page);
 
-    viewModel.set('name', '');
-    viewModel.set('breed', '');
-    viewModel.set('height', '');
-
+    if (false) {
+        viewModel.set('name', '');
+        viewModel.set('breed', '');
+        viewModel.set('height', '');
+    }
     // init properties
 
     page.bindingContext = viewModel;
@@ -56,6 +62,7 @@ function pageLoaded(args) {
     if (isInit) {
         isInit = false;
         viewModel.on(viewModel.events.addHorse, onAddHorse);
+        viewModel.on(viewModel.events.addHorsePic, onAddHorsePic);
     }
 
     // additional pageLoaded

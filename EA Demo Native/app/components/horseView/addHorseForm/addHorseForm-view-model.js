@@ -1,36 +1,55 @@
 'use strict';
 var ViewModel,
     Observable = require('data/observable').Observable;
+var cameraModule = require("camera");
 // additional requires
 
 ViewModel = new Observable({
 
-    name: 'Z Horse',
+    name: '',
+    breed: '',
+    height: '',
+    picture: '',
 
-    breed: 'Zebra',
-
-    height: '14',
-
-    
-    //not working!
-    
     events: {
-        nothing: 'NOTHING',
+        addHorsePic: 'addHorsePic',
         addHorse: 'addHorse'
     },
-	
-    
+
+
     // additional properties
+
+
     onAddHorse: function () {
-        alert('View Model onAddHorse()');
         this.notify({
             eventName: this.events.addHorse,
-            name: this.get('name')/**,
+            name: this.get('name'),
             breed: this.get('breed'),
-            height: this.get('height')**/
+            height: this.get('height')
         });
+    },
+
+    onAddHorsePic: function () {
+        var self = this;
+        cameraModule.takePicture({
+                width: 300,
+                height: 300,
+                keepAspectRatio: true
+            })
+            .then(function (cameraPicture) {
+                self.set('picture', cameraPicture);
+            })
+            .catch(alert('error with picture'))
+            .then(function () {
+                self.notify({
+                    eventName: self.events.addHorsePic,
+                    horsePic: self.get('picture')
+                });
+            });
     }
-    
+
+
+
 });
 
 // START_CUSTOM_CODE_masterDetailViewModel

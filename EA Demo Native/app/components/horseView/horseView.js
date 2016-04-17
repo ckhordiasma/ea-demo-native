@@ -33,7 +33,7 @@ function onAddItemTap(args) {
     
     helpers.navigate({
         moduleName: 'components/horseView/addHorseForm/addHorseForm',
-        
+      
     });
 }
 exports.onAddItemTap = onAddItemTap;

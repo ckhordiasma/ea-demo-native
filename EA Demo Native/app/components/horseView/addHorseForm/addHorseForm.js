@@ -7,6 +7,7 @@ var isInit = true,
     viewModel = require('./addHorseForm-view-model'),
 
     horseService = require('./addHorseForm-service');
+var enums = require("ui/enums");
 
 function onRequestSuccess() {
     helpers.back();
@@ -24,11 +25,17 @@ exports.onCancelTap = function onCancelTap() {
 
 function onAddHorse(data) {
 
+    var file = {
+        "Filename": Math.random().toString(36).substring(2, 15) + ".jpg",
+        "ContentType": "image/jpeg",
+        "base64": data.picture.toBase64String(enums.ImageFormat.jpeg, 100)
+    };
     //alert(data.name);
     var horseData = {
         name: data.name,
         breed: data.breed,
-        height: data.height
+        height: data.height,
+        picture: file
     }
 
 
@@ -38,7 +45,7 @@ function onAddHorse(data) {
 exports.onAddHorse = onAddHorse;
 
 function onAddHorsePic() {
-    alert('adding horse pic!');
+    //alert('adding horse pic!');
 }
 exports.onAddHorsePic = onAddHorsePic;
 

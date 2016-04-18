@@ -25,7 +25,7 @@ function onLogout() {
     var topmost = frameModule.topmost();
 	
     //navigate to the login screen (homeView) after logging out.
-    topmost.navigate('components/homeView/homeView');
+    topmost.navigate('components/loginView/loginView');
 }
 
 exports.onBack = onBack;

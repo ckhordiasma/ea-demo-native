@@ -36,20 +36,30 @@ Service.prototype.addHorse = function (args, successCallback, errorCallback) {
     var horseCoverageData = dataService.data('HorseCoverage');
 
     var membershipID = localSettings.getString(consts.membershipIdKey, 'no membership ID');
+    var pictureCloudFile;
 
-    return horseData.create({
-            Name: args.name,
-            Breed: args.breed,
-            Height: args.height,
-            // save properties
-        })
-        .then(onRequestSuccess.bind(this))
-        .catch(onRequestFail.bind(this))
-        .then(function (horse) {
-            return horseCoverageData.create({
-                'HorseID': horse.Id,
-                'MembershipID': membershipID
-            });
-        }).then(successCallback, errorCallback);
+    return dataService.Files.create(args.picture,
+        function (data) {
+            alert(JSON.stringify(data.result));
+            pictureCloudFile = data.result.Id;
+            return horseData.create({
+                    Name: args.name,
+                    Breed: args.breed,
+                    Height: args.height,
+                    Image: pictureCloudFile
+                        // save properties
+                })
+                .then(onRequestSuccess.bind(this))
+                .catch(onRequestFail.bind(this))
+                .then(function (horse) {
+                    return horseCoverageData.create({
+                        'HorseID': horse.Id,
+                        'MembershipID': membershipID
+                    });
+                }).then(successCallback, errorCallback);
+        },
+        function (error) {});
+
+
 }
 module.exports = new Service();

@@ -5,11 +5,11 @@ var menuItems,
 
 menuItems = [{
     "title": "Login Page",
-    "moduleName": "components/homeView/homeView",
+    "moduleName": "components/loginView/loginView",
     "icon": "\ue0dd"
 }, {
     "title": "Horses",
-    "moduleName": "components/masterDetailView/masterDetailView",
+    "moduleName": "components/horseView/horseView",
     "icon": "\ue0e4"
 }, {
     "title": "Profile",

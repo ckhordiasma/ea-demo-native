@@ -25,7 +25,8 @@ ViewModel = new Observable({
             eventName: this.events.addHorse,
             name: this.get('name'),
             breed: this.get('breed'),
-            height: this.get('height')
+            height: this.get('height'),
+            picture: this.get('picture'),
         });
     },
 
@@ -38,14 +39,19 @@ ViewModel = new Observable({
             })
             .then(function (cameraPicture) {
                 self.set('picture', cameraPicture);
+                
             })
-            .catch(alert('error with picture'))
-            .then(function () {
-                self.notify({
-                    eventName: self.events.addHorsePic,
-                    horsePic: self.get('picture')
-                });
+
+        .then(function () {
+            
+            
+            self.notify({
+                eventName: self.events.addHorsePic,
+                horsePic: self.get('picture')
             });
+        });
+
+
     }
 
 

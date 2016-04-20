@@ -7,6 +7,7 @@ var isInit = true,
     localSettings = require('application-settings'),
     consts,
     viewModel = require('./horseView-view-model');
+var dataService = require('../../dataProviders/eaDemoNative');
 
 
 consts = {
@@ -29,11 +30,11 @@ function onListViewItemTap(args) {
 exports.onListViewItemTap = onListViewItemTap;
 
 function onAddItemTap(args) {
-    
-    
+
+
     helpers.navigate({
         moduleName: 'components/horseView/addHorseForm/addHorseForm',
-      
+
     });
 }
 exports.onAddItemTap = onAddItemTap;
@@ -113,6 +114,7 @@ function pageLoaded(args) {
 
 // START_CUSTOM_CODE_masterDetailView
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
+
 
 // END_CUSTOM_CODE_masterDetailView
 exports.pageLoaded = pageLoaded;
